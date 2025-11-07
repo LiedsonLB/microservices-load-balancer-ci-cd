@@ -24,10 +24,16 @@ public class MsAgendamentoApplication {
 class AgendamentoController {
 
 	private final Environment environment;
-	
+
 	@GetMapping
-    public String getAgendamentos() {
-        String port = environment.getProperty("local.server.port");
-        return "Instância rodando na porta " + port;
-    }
+	public String getAgendamentos() {
+		String port = environment.getProperty("local.server.port");
+		String hostname = "desconhecido";
+		try {
+			hostname = java.net.InetAddress.getLocalHost().getHostName();
+		} catch (Exception ignored) {
+		}
+
+		return "Instância rodando na porta " + port + " | Host: " + hostname;
+	}
 }

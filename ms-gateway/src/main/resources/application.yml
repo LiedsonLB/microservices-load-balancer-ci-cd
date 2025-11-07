@@ -14,15 +14,18 @@ spring:
   application:
     name: ms-gateway
   cloud:
+        loadbalancer:
+          retry:
+            enabled: true
         gateway:
-            server:
-                webflux:
-                    discovery:
-                      locator:
-                        enabled: true
-                        lower-case-service-id: true
-                    routes:
-                      - id: ms-agendamento
-                        uri: lb://ms-agendamento
-                        predicates:
-                          - Path=/api/agendamentos/**
+          server:
+              webflux:
+                  discovery:
+                    locator:
+                      enabled: true
+                      lower-case-service-id: true
+                  routes:
+                    - id: ms-agendamento
+                      uri: lb://ms-agendamento
+                      predicates:
+                        - Path=/api/agendamentos/**
