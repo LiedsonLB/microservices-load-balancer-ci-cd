@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  service-discovery:
+    image: liedsonlb/service-discovery-test:latest
+    ports:
+      - "8761:8761"
+    networks:
+      - vivamais_net
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  gateway:
+    image: liedsonlb/gateway-test:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - vivamais_net
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  ms-agendamento:
+    image: liedsonlb/agendamento-test:latest
+    ports:
+      - "8081:8081"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: vivamais
+      DB_USER: root
+      DB_PASSWORD: root
+    networks:
+      - vivamais_net
+    deploy:
+      replicas: 4
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  vivamais_db_data:
+
+networks:
+  vivamais_net:
+    driver: overlay

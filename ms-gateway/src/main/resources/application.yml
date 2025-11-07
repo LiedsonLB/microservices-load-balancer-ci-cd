@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+spring:
+  application:
+    name: ms-gateway
+  cloud:
+        gateway:
+            server:
+                webflux:
+                    discovery:
+                      locator:
+                        enabled: true
+                        lower-case-service-id: true
+                    routes:
+                      - id: ms-monolithic
+                        uri: lb://ms-monolithic
+                        predicates:
+                          - Path=/api/agendamentos/**
