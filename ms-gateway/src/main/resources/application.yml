@@ -22,7 +22,7 @@ spring:
                         enabled: true
                         lower-case-service-id: true
                     routes:
-                      - id: ms-monolithic
-                        uri: lb://ms-monolithic
+                      - id: ms-agendamento
+                        uri: lb://ms-agendamento
                         predicates:
                           - Path=/api/agendamentos/**

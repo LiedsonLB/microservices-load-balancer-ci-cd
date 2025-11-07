@@ -25,14 +25,6 @@ services:
 
   ms-agendamento:
     image: liedsonlb/agendamento-test:latest
-    ports:
-      - "8081:8081"
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_NAME: vivamais
-      DB_USER: root
-      DB_PASSWORD: root
     networks:
       - vivamais_net
     deploy:
