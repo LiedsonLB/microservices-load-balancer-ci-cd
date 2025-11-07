@@ -22,7 +22,7 @@ jobs:
       #     password: ${{ env.DOCKERHUB_TOKEN }}
 
       - name: Build and Push Spring Boot Gateway (ms-gateway)
-        working-directory: ./backend/ms-gateway/
+        working-directory: ./ms-gateway/
         run: |
           docker build -t liedsonlb/gateway-test:latest -f Dockerfile .
           docker push liedsonlb/gateway-test:latest
