@@ -1,6 +1,10 @@
 spring:
   application:
     name: ms-agendamento
+  cloud:
+        loadbalancer:
+          retry:
+            enabled: true
 
 eureka:
   instance:
