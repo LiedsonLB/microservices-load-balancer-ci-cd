@@ -15,26 +15,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # - name: Login to Docker Hub
-      #   uses: docker/login-action@v3
-      #   with:
-      #     username: ${{ env.DOCKERHUB_USERNAME }}
-      #     password: ${{ env.DOCKERHUB_TOKEN }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKERHUB_USERNAME }}
+          password: ${{ env.DOCKERHUB_TOKEN }}
 
       - name: Build and Push Spring Boot Gateway (ms-gateway)
         working-directory: ./ms-gateway/
         run: |
-          docker build -t liedsonlb/gateway-test:latest -f Dockerfile .
-          docker push liedsonlb/gateway-test:latest
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gateway-test:latest -f Dockerfile .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/gateway-test:latest
 
       - name: Build and Push Spring Boot Service Discovery (ms-service-discovery)
         working-directory: ./ms-service-discovery/
         run: |
-          docker build -t liedsonlb/service-discovery-test:latest -f Dockerfile .
-          docker push liedsonlb/service-discovery-test:latest
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/service-discovery-test:latest -f Dockerfile .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/service-discovery-test:latest
 
       - name: Build and Push Spring Boot Agendamento (ms-agendamento)
         working-directory: ./ms-agendamento/
         run: |
-          docker build -t liedsonlb/agendamento-test:latest -f Dockerfile .
-          docker push liedsonlb/agendamento-test:latest
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/agendamento-test:latest -f Dockerfile .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/agendamento-test:latest
